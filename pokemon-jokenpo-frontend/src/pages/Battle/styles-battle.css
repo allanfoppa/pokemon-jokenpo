@@ -1,0 +1,224 @@
+*, *::before, *::after, html, body {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.battle-section{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+        'info-pk-cpu    info-pk-cpu'
+        '.              pk-cpu'
+        'pk-p1          info-pk-p1'
+        'msg            msg';
+    font-family: 'pokemon_gbregular';
+    font-size: 2em;
+    height: 100vh;
+    position: relative;
+    -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+}
+
+.player-choice {
+    position: absolute;
+    justify-self: center;
+    top: calc(50% - 150px);
+    z-index: 1;
+    transform: rotate(-5deg);
+    justify-items: center;
+    gap: 30px;
+    grid-auto-flow: column;
+}
+
+.info-pk-cpu{
+    grid-area: info-pk-cpu;
+    align-content: center;
+    display: grid;
+    margin-left: 15%;
+}
+
+.info-pk-cpu-stats {
+    display: flex;
+    margin-top: 20px;
+    border-left: 10px solid;
+    border-bottom: 10px solid;
+    padding: 20px;
+    max-width: 330px;
+    border-bottom-left-radius: 10px;
+    position: relative;
+}
+
+.info-pk-cpu-stats::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-left: 23px solid #000;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.battle-pokemon-image {
+    transform: scale(4);
+}
+
+.battle-pokemon-name {
+    text-transform: capitalize;
+}
+
+.pk-cpu{
+    grid-area: pk-cpu;
+    display: grid;
+    justify-content: center;
+}
+
+.pk-p1{
+    grid-area: pk-p1;
+    display: grid;
+    justify-content: center;
+}
+
+.info-pk-p1{
+    grid-area: info-pk-p1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-pk-p1-stats {
+    display: flex;
+    margin-top: 20px;
+    border-right: 10px solid;
+    border-bottom: 10px solid;
+    padding: 20px;
+    max-width: 330px;
+    border-bottom-right-radius: 10px;
+    position: relative;
+    left: 40px;
+}
+
+
+.info-pk-p1-stats::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 23px solid #000;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.msg{
+    grid-area: msg;
+    align-content: center;
+    border: 5px solid;
+    border-radius: 10px;
+    height: 100%;
+    min-height: 150px;
+}
+
+.msg-container{
+    display: grid;
+    grid-template-columns: 1fr .8fr;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.msg-middle-border {
+    border: 3px solid #fff;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.msg-inner-border {
+    border: 5px solid #000;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.moves-container{
+    border: 5px solid;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    left: 30px;
+    display: none;
+}
+
+.moves{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    column-gap: 150px;
+}
+
+.move--choose{
+    cursor: pointer;
+    position: relative;
+}
+
+.move--choose::before{
+    content: '';
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #000;
+    position: absolute;
+    left: -8%;
+    top: 12%;
+    opacity: 0;
+}
+
+.move--choose:hover::before{
+    opacity: 1;
+}
+
+/* div::before {
+    position: absolute;
+    left:0;
+    top: 20px;
+    content: "";
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: lightblue;
+    transform: skew(50deg);
+} */
+
+.progress-bar{
+    position: relative;
+    height: 30px;
+    width: 200px;
+    border-radius: 50px;
+    border: 1px solid;
+}
+
+.filler-full{
+    background: green;
+    height: 100%;
+    border-radius: inherit;
+    transition: width 2s ease-in;
+    width: 100%;
+}
+
+.filler-half{
+    background: yellow;
+    width: 66.3333333%;
+}
+
+.filler-danger{
+    background: red;
+    width: 33.3333333%;
+}
+
+.filler-empty{
+    background: white;
+}
