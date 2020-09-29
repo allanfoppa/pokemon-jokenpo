@@ -59,7 +59,7 @@ export default function Logon() {
                     />
 
                     <button
-                        data-cy="enter-login"
+                        data-cy="press-button"
                         className="button">
                             entrar
                     </button>
