@@ -5,5 +5,6 @@ describe('Login', () => {
 
     it('Realizar o login com sucesso', () => {
         cy.basicForm('allan', '147')
+        cy.screenshot('realizando o login')
     })
 })

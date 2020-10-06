@@ -250,6 +250,7 @@ export default function Home(){
 
                     <label className="trainer-home--label-filter">By Number</label>
                     <input
+                        data-cy="search-pokemon-by-number"
                         type="text"
                         className="login-container__inner-input"
                         value={wantedPokemonByNumber}
@@ -257,7 +258,10 @@ export default function Home(){
                         onFocus={cleanFormValues}
                     />
 
-                    <button onClick={handleSearchPokemon} className="button-alt">
+                    <button
+                        data-cy="press-button"
+                        onClick={handleSearchPokemon}
+                        className="button-alt">
                         <FiSearch width='16px' className="icon-alt"></FiSearch>
                         search
                     </button>
@@ -293,7 +297,7 @@ export default function Home(){
                     <button className="pokemon-choose button" onClick={() => handleChoosePokemon(pokemoninfowanted[1])}>I choose you</button>
                 </div>
                 <div></div>
-                </main>
+            </main>
         </section>
     )
 }

@@ -1,0 +1,1 @@
+import './search_modules/search_pokemon_by_number'

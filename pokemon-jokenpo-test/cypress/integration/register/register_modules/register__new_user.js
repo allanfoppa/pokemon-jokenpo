@@ -5,5 +5,6 @@ describe('Cadastro', () => {
 
     it('Realizar o cadastro com sucesso', () => {
         cy.basicForm('ash', '123')
+        cy.screenshot('realizando o cadastro')
     })
 })
