@@ -67,14 +67,15 @@ body {
 }
 
 .login-container__inner-link{
-    font-size: 14px;
-    text-decoration: none;
-    color: #000;
     display: grid;
     grid-template-columns: 20px 1fr;
     gap: 10px;
     align-items: baseline;
     margin-top: 10px;
+    height: 20px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #000;
 }
 
 /* HOME */

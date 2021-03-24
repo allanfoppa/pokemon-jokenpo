@@ -2,10 +2,10 @@ const mysql = require('mysql')
 
 // LOCAL
 const connection = mysql.createConnection({
-    host     : '127.0.0.1',
+    host     : 'pokemon_jokenpo_db',
     port     : '3306',
-    user     : 'root',
-    password : 'bd2020',
+    user     : 'ash',
+    password : 'bd2021',
     database : 'pokemon_jokenpo'
 });
 
