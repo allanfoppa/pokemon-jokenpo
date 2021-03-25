@@ -4,7 +4,7 @@ import { FiLogIn } from 'react-icons/fi'
 
 import handleWithErrorOnSubmit from '../../helpers/handleWithErrorOnSubmit'
 
-import backApi from '../../services/api'
+import webservice from '../../services/api'
 
 import logoImg from '../../assets/images/pokemon-logo-fontmeme.png'
 
@@ -19,7 +19,7 @@ export default function Logon() {
         e.preventDefault()
 
         try {
-            const response = await backApi.post('entrar', { trainer_name, trainer_pw })
+            const response = await webservice.post('entrar', { trainer_name, trainer_pw })
 
             if (response.data.find === true) {
                 localStorage.setItem('trainer_name', trainer_name)

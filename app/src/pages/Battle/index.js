@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import backApi from '../../services/api'
+import webservice from '../../services/api'
 import './styles-battle.css'
 import axios from 'axios'
 
@@ -12,10 +12,10 @@ import scissors from '../../assets/images/pokemon-scissors-fontmeme.png'
 export default function Battle(props) {
     const history = useHistory()
     const name_saved = localStorage.getItem('trainer_name')
-    
+
     const choose = 'Choose your move:'
     const yourChoose = 'used: '
-    
+
     var isShow = 'display--grid'
     var isHide = 'display--none'
 
@@ -34,15 +34,15 @@ export default function Battle(props) {
     const [ cpuHPCount, setCpuHPCount ] = useState(2)
     const [ p1HP, setP1HP ] = useState('')
     const [ cpuHP, setCpuHP ] = useState('')
-    
+
     const pokemonP1 = () => {
         const pokemonName = Object.values(props.location.pokemonProps)
         axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
         .then(function(response) {
-            
+
             let name = response.data.name
             let image = response.data.sprites.back_default
-            
+
             const data = [
                 name,
                 image
@@ -60,10 +60,10 @@ export default function Battle(props) {
         const pokemonCPUNumber = Math.floor(Math.random() * 807)
         axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonCPUNumber}`)
         .then(function(response) {
-            
+
             let name = response.data.name
             let image = response.data.sprites.front_default
-            
+
             const data = [
                 name,
                 image
@@ -82,11 +82,11 @@ export default function Battle(props) {
     }
 
     function handleLoseBattle(){
-        
+
         localStorage.setItem('result', 'lose')
         const result = localStorage.getItem('result')
-        
-        backApi.put('/batalha', result, {
+
+        webservice.put('/batalha', result, {
             headers: {
                 PokemonTrainer: name_saved,
                 Result: result
@@ -99,19 +99,19 @@ export default function Battle(props) {
         .catch(function(error) {
             console.log(error)
         })
-        
+
         setTimeout(() => {
             history.push('/home')
-        }, 4000);
+        }, 4000)
 
     }
 
     function handleWinBattle(){
-        
+
         localStorage.setItem('result', 'win')
         const result = localStorage.getItem('result')
-        
-        backApi.put('/batalha', result, {
+
+        webservice.put('/batalha', result, {
             headers: {
                 PokemonTrainer: name_saved,
                 Result: result
@@ -124,10 +124,10 @@ export default function Battle(props) {
         .catch(function(error) {
             console.log(error)
         })
-        
+
         setTimeout(() => {
             history.push('/home')
-        }, 4000);
+        }, 4000)
 
     }
 
@@ -151,7 +151,7 @@ export default function Battle(props) {
                 handleLoseBattle()
             }
         }
-        
+
         // Diminui a vida da máquina
         function decrementCpuHPCount(){
             setCpuHPCount(cpuHPCount - 1)
@@ -168,10 +168,10 @@ export default function Battle(props) {
 
         // Imagens das escolhas
         const moves = { rock, paper, scissors }
-    
+
         // Escolha da CPU
-        const arrComputerChoice = ["rock", "paper", "scissors"];
-        const computerChoice = arrComputerChoice[Math.floor(Math.random() * arrComputerChoice.length)];
+        const arrComputerChoice = ["rock", "paper", "scissors"]
+        const computerChoice = arrComputerChoice[Math.floor(Math.random() * arrComputerChoice.length)]
 
         const winRound = firstPlayerChoice + ' beats ' + computerChoice
         const loseRound = firstPlayerChoice + ' loses ' + computerChoice
@@ -203,7 +203,6 @@ export default function Battle(props) {
         setshowOrHide(isShow)
 
         if (firstPlayerChoice === computerChoice) {
-            
             // Msg de empate
             setbattleText(tieRound)
             setTimeout(() => {
@@ -213,7 +212,7 @@ export default function Battle(props) {
                 setbattleText(choose)
                 // Mostrar as escolhas para o p1
                 setpokemonMoves(isShow)
-            }, 4000);
+            }, 4000)
 
         } else if (firstPlayerChoice === "rock") {
             switch (computerChoice) {
@@ -230,8 +229,8 @@ export default function Battle(props) {
                         setbattleText(choose)
                         // Mostrar as escolhas para o p1
                         setpokemonMoves(isShow)
-                    }, 4000);
-                    break;
+                    }, 4000)
+                    break
                 case "paper":
                     // Msg perdedora no round
                     setbattleText(loseRound)
@@ -245,8 +244,8 @@ export default function Battle(props) {
                         setbattleText(choose)
                         // Mostrar as escolhas para o p1
                         setpokemonMoves(isShow)
-                    }, 4000);
-                break;
+                    }, 4000)
+                break
             }
 
         } else if (firstPlayerChoice === "paper") {
@@ -266,8 +265,8 @@ export default function Battle(props) {
                         setbattleText(choose)
                         // Mostrar as escolhas para o p1
                         setpokemonMoves(isShow)
-                    }, 4000);
-                break;
+                    }, 4000)
+                break
                 case "scissors":
                     // Msg perdedora no round
                     setbattleText(loseRound)
@@ -281,8 +280,8 @@ export default function Battle(props) {
                         setbattleText(choose)
                         // Mostrar as escolhas para o p1
                         setpokemonMoves(isShow)
-                    }, 4000);
-                break;
+                    }, 4000)
+                break
 
             }
 
@@ -303,8 +302,8 @@ export default function Battle(props) {
                         setbattleText(choose)
                         // Mostrar as escolhas para o p1
                         setpokemonMoves(isShow)
-                    }, 4000);
-                break;
+                    }, 4000)
+                break
                 case "rock":
                     // Msg perdedora no round
                     setbattleText(loseRound)
@@ -318,8 +317,8 @@ export default function Battle(props) {
                         setbattleText(choose)
                         // Mostrar as escolhas para o p1
                         setpokemonMoves(isShow)
-                    }, 4000);
-                break;
+                    }, 4000)
+                break
             }
 
         }
@@ -345,11 +344,11 @@ export default function Battle(props) {
             </div>
             <div className="pk-cpu">
                 <div className="battle-ground">
-                    <img src={pokemonPlayerCPU[1]} className="battle-pokemon-image"/>
+                    <img src={pokemonPlayerCPU[1]} className="battle-pokemon-image" alt="pokemon CPU" />
                 </div>
             </div>
             <div className="pk-p1">
-                <img src={pokemonPlayerOne[1]} className="battle-pokemon-image"/>
+                <img src={pokemonPlayerOne[1]} className="battle-pokemon-image" alt="pokemon player"/>
             </div>
             <div className="info-pk-p1">
                 <p className="battle-pokemon-name"><span id="js-battle-pokemon-name">{pokemonPlayerOne[0]}</span> <span>:L100</span></p>

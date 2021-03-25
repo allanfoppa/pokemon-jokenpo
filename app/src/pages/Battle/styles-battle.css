@@ -6,7 +6,7 @@
 .battle-section{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-areas: 
+    grid-template-areas:
         'info-pk-cpu    info-pk-cpu'
         '.              pk-cpu'
         'pk-p1          info-pk-p1'
@@ -15,10 +15,10 @@
     font-size: 2em;
     height: 100vh;
     position: relative;
-    -webkit-user-select: none;  
-  -moz-user-select: none;    
-  -ms-user-select: none;      
-  user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .player-choice {
@@ -166,8 +166,8 @@
 
 .move--choose::before{
     content: '';
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
     border-left: 10px solid #000;

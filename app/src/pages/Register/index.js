@@ -4,7 +4,7 @@ import { FiArrowLeft } from 'react-icons/fi'
 
 import handleWithErrorOnSubmit from '../../helpers/handleWithErrorOnSubmit'
 
-import backApi from '../../services/api'
+import webservice from '../../services/api'
 
 import logoImg from '../../assets/images/pokemon-logo-fontmeme.png'
 
@@ -19,7 +19,7 @@ export default function Register() {
         e.preventDefault()
 
         try {
-            const response = await backApi.post('cadastrar', { trainer_name, trainer_pw })
+            const response = await webservice.post('cadastrar', { trainer_name, trainer_pw })
 
             localStorage.setItem('trainer_name', response.data.trainer_name)
 

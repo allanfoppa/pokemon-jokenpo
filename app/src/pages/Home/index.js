@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import backApi from '../../services/api'
+import webservice from '../../services/api'
 import { FiTrash2, FiLogOut, FiSearch } from 'react-icons/fi'
 import axios from 'axios'
 
@@ -10,7 +10,6 @@ import battleImg from '../../assets/images/pokemon-battle-fontmeme.png'
 export default function Home(){
     const history = useHistory()
     const name_saved = localStorage.getItem('trainer_name')
-    console.log(name_saved)
 
     var isShow = 'display--grid'
     var isHide = 'display--none'
@@ -30,23 +29,23 @@ export default function Home(){
         axios.get(`https://pokeapi.co/api/v2/pokemon/` + (wantedPokemonByName !== '' ? wantedPokemonByName : wantedPokemonByNumber))
         .then(response => {
             const isTwoTypes = response.data.types
-
+            var arrPokemon = []
             const p = response.data.id
             const o = response.data.name
             const k = response.data.types[0].type.name
             const e = response.data.sprites.front_default
             if (isTwoTypes.length > 1) {
                 let mon = response.data.types[1].type.name
-                var arrPokemon = [ p, o, k, e , mon ]
+                arrPokemon = [ p, o, k, e , mon ]
             } else {
-                var arrPokemon = [ p, o, k, e ]
+                arrPokemon = [ p, o, k, e ]
             }
 
             setPokemonInfoWanted(arrPokemon)
             setIsHideOrShowSearch(isShow)
         })
         .catch(function (error) {
-            console.log(error);
+            console.log(error)
             alert('O pokemon pesquisado não existe, tente novamente.')
         })
     }
@@ -60,17 +59,16 @@ export default function Home(){
                 const img = response.data.sprites.front_default
 
                 const isTwoTypes = response.data.types
+                var pokemoninfowanted = []
 
                 if (isTwoTypes.length > 1) {
                     var type2 = response.data.types[1].type.name
-                    var pokemoninfowanted = [id, name, type1, img, type2]
+                    pokemoninfowanted = [id, name, type1, img, type2]
                 } else {
-                    var pokemoninfowanted = [id, name, type1, img]
+                    pokemoninfowanted = [id, name, type1, img]
                 }
 
-
                 setPokemonInfoWanted(pokemoninfowanted)
-                
                 setIsHideOrShowSearch(isShow)
             })
             .catch(function (error) {
@@ -84,7 +82,7 @@ export default function Home(){
         const pokemon_trainer = name_saved
 
         try {
-            await backApi.delete('home', {
+            await webservice.delete('home', {
                 headers: {
                     PokemonTrainer: pokemon_trainer,
                     PokemonName: pokemon_name,
@@ -97,25 +95,24 @@ export default function Home(){
                 const name = response.data.name
                 const type1 = response.data.types[0].type.name
                 const img = response.data.sprites.front_default
-
+                var pokemoninfo = []
                 const isTwoTypes = response.data.types
 
                 if (isTwoTypes.length > 1) {
                     var type2 = response.data.types[1].type.name
-                    var pokemoninfo = [id, img, name, type1, type2]
+                    pokemoninfo = [id, img, name, type1, type2]
                 } else {
-                    var pokemoninfo = [id, img, name, type1]
+                    pokemoninfo = [id, img, name, type1]
                 }
 
                 setTeam(pokemoninfo)
-                
                 setIsHideOrShow(isShow)
 
                 const data = {
                     pokemon_name: name
                 }
 
-                backApi.post('home', data, {
+                webservice.post('home', data, {
                     headers: {
                         PokemonTrainer: pokemon_trainer,
                     },
@@ -132,11 +129,10 @@ export default function Home(){
                 // handle error
                 console.log(error)
             })
-            
+
         } catch (error) {
             alert(error)
         }
-
 
     }
 
@@ -153,17 +149,17 @@ export default function Home(){
             const name = response.data.name
             const type1 = response.data.types[0].type.name
             const img = response.data.sprites.front_default
-
+            var pokemoninfo = []
             const isTwoTypes = response.data.types
 
             if (isTwoTypes.length > 1) {
                 var type2 = response.data.types[1].type.name
-                var pokemoninfo = [id, img, name, type1, type2]
+                pokemoninfo = [id, img, name, type1, type2]
             } else {
-                var pokemoninfo = [id, img, name, type1]
+                pokemoninfo = [id, img, name, type1]
             }
             setIsHideOrShow(isShow)
-            setTeam(pokemoninfo)                
+            setTeam(pokemoninfo)
         })
         .catch(function (error) {
             console.log(error)
@@ -175,7 +171,7 @@ export default function Home(){
         const pokemon_trainer = name_saved
 
         try {
-            await backApi.delete('home', {
+            await webservice.delete('home', {
                 headers: {
                     PokemonTrainer: pokemon_trainer,
                     PokemonName: pokemon_name,
@@ -185,22 +181,21 @@ export default function Home(){
             cleanFormValues()
         } catch (error) {
             console.log(error)
-        } 
+        }
     }
 
     useEffect(() => {
-        backApi.get('home', {
+        webservice.get('home', {
             headers: {
                 PokemonTrainer: name_saved,
             }
         }).then(response => {
-            console.log(response)
             setVictories(response.data[0].trainer_victories)
             setDefeats(response.data[0].trainer_defeats)
 
             const trainerHasPokemon = response.data[0].pokemon
 
-            if (trainerHasPokemon != '') {
+            if (trainerHasPokemon !== '') {
                 handleIfHasSavedPokemon(response.data[0].pokemon)
             } else {
                 setIsHideOrShow(isHide)
